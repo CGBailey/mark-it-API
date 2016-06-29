@@ -5,9 +5,9 @@ var request = require('request');
 var amazon = require('amazon-product-api');
 
 var client = amazon.createClient({
-  awsId: "AKIAJS5FBMNWMU3XMK7Q",
-  awsSecret: "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",
-  awsTag: "markitcapston-20"
+  awsId: ,
+  awsSecret:,
+  awsTag:
 });
 /* GET home page. */
 router.get('/', function(req, res, next) {
