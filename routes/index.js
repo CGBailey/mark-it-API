@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   client.itemSearch({
     searchIndex: 'Books',
     keywords: 'rpg games',
-    responseGroup: 'ItemAttributes,Offers,Images,Large'
+    responseGroup: 'Large'
   }).then(function(results){
     console.log(results);
     res.send(results)
