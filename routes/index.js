@@ -5,9 +5,9 @@ var request = require('request');
 var amazon = require('amazon-product-api');
 
 var client = amazon.createClient({
-  awsId: ,
-  awsSecret:,
-  awsTag:
+  awsId:process.env.AWSACCESSKEYID ,
+  awsSecret:process.env.AWSSECRETKEY,
+  awsTag:process.env.AWSTAG
 });
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,5 +21,10 @@ router.get('/', function(req, res, next) {
   }).catch(function(err){
     console.log(err);
   });
+});
+
+router.get('/test', function(req, res, next) {
+  console.log(process.env.AWSTAG);
+
 });
 module.exports = router;
