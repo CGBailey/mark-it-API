@@ -11,12 +11,12 @@ var client = amazon.createClient({
 });
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log("OW!");
   client.itemSearch({
     searchIndex: 'Books',
     keywords: 'rpg games',
     responseGroup: 'Large'
   }).then(function(results){
-    console.log(results);
     res.send(results)
   }).catch(function(err){
     console.log(err);
