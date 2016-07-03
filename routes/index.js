@@ -9,6 +9,7 @@ var client = amazon.createClient({
   awsSecret:process.env.AWSSECRETKEY,
   awsTag:process.env.AWSTAG
 });
+var queries = [{search: 'Books', keywords: 'rpg game'}, {search: 'Toys', keywords: 'board game'}, {search: 'Toys', keywords: 'card game'}, {search: 'Books', keywords: "tabletop game"}]
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -25,7 +26,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/more', function(req, res, next) {
-  var queries = [{search: 'Books', keywords: 'rpg game'}, {search: 'Toys', keywords: 'board game'}, {search: 'Toys', keywords: 'card game'}, {search: 'Books', keywords: "tabletop game"}]
   function query() {
     var popped = queries.pop();
     queries.unshift(popped)
