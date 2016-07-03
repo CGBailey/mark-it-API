@@ -11,7 +11,7 @@ var client = amazon.createClient({
 });
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log("OW!");
+
   client.itemSearch({
     searchIndex: 'Books',
     keywords: 'rpg games',
@@ -23,8 +23,28 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/test', function(req, res, next) {
-  console.log(process.env.AWSTAG);
+router.get('/more', function(req, res, next) {
+  var queries = [{search: 'Books', keywords: 'rpg game'}, {search: 'Toys', keywords: 'board game'}, {search: 'Toys', keywords: 'card game'}, {search: 'Books', keywords: "tabletop game"}]
 
+  function query() {
+
+    let popped = queries.pop();
+    queries.unshift(popped)
+    console.log(queries[0].search);
+  }
+query()
+  client.itemSearch({
+    searchIndex: queries[0].search,
+    keywords: queries[0].keywords,
+    responseGroup: 'Large'
+  }).then(function(results){
+    res.send(results)
+  }).catch(function(err){
+    console.log(err);
+    res.send(err)
+  });
 });
+
+
+
 module.exports = router;
