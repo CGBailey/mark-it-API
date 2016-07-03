@@ -20,15 +20,14 @@ router.get('/', function(req, res, next) {
     res.send(results)
   }).catch(function(err){
     console.log(err);
+    res.send(err)
   });
 });
 
 router.get('/more', function(req, res, next) {
   var queries = [{search: 'Books', keywords: 'rpg game'}, {search: 'Toys', keywords: 'board game'}, {search: 'Toys', keywords: 'card game'}, {search: 'Books', keywords: "tabletop game"}]
-
   function query() {
-
-    let popped = queries.pop();
+    var popped = queries.pop();
     queries.unshift(popped)
     console.log(queries[0].search);
   }
