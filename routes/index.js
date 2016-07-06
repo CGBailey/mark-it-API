@@ -45,50 +45,56 @@ query()
 });
 
 router.post('/right', function(req, res, next) {
-  // knex('products').where({name: req.body.product_name})
-  //   .then(function(there) {
-  //     if(!there[0]) {
-  //       knex('products').insert({name: req.body.product_name})
-  //     }
-  // }).then(function(){
-  // knex('products').where({name: req.body.product_name})
-// })
-  // .then(function(product){
-  //   knex('swipes').insert({product_id: product[0].id, right: true})
-  // })
+  knex('products').where({name: req.body.product_name})
+    .then(function(there) {
+      if(!there[0]) {
+        knex('products').insert({name: req.body.product_name})
+      }
+  }).then(function(){
+  knex('products').where({name: req.body.product_name})
+})
+  .then(function(product){
+    knex('swipes').insert({product_id: product[0].id, right: true})
+  })
 });
 
 router.post('/left', function(req, res, next) {
-  // knex('products').where({name: req.body.product_name})
-  //   .then(function(there) {
-  //     if(!there[0]) {
-  //       knex('products').insert({name: req.body.product_name})
-  //     }
-  // }).then(function(){
-  // knex('products').where({name: req.body.product_name})
-// })
-  // .then(function(){
-  //   knex('swipes').insert({product_id: product[0].id, left: true})
-  // })
+  knex('products').where({name: req.body.product_name})
+    .then(function(there) {
+      if(!there[0]) {
+        knex('products').insert({name: req.body.product_name})
+      }
+  }).then(function(){
+  knex('products').where({name: req.body.product_name})
+})
+  .then(function(){
+    knex('swipes').insert({product_id: product[0].id, left: true})
+  })
 });
 
 router.post('/right', function(req, res, next) {
-  // knex('products').where({name: req.body.product_name})
-  // .then(function(product) {
-  //   knex('swipes').where({product_id: product_id, right: true})
-  // }).then(function(swipes) {
-  //   res.send(swipes.length)
-  // })
+  knex('products').where({name: req.body.product_name})
+  .then(function(product) {
+    knex('swipes').where({product_id: product_id, right: true})
+  }).then(function(swipes) {
+    res.send(swipes.length)
+  })
 })
 
 
 router.post('/left', function(req, res, next) {
-  // knex('products').where({name: req.body.product_name}).
-  // then(function(product) {
-  //   knex('swipes').Where({product_id: product_id, left: true})
-  // }).then(function(swipes) {
-  //   res.send(swipes.length)
-  // })
+  knex('products').where({name: req.body.product_name}).
+  then(function(product) {
+    knex('swipes').Where({product_id: product_id, left: true})
+  }).then(function(swipes) {
+    res.send(swipes.length)
+  })
+})
+
+router.get('/swipes', function(req, res, next) {
+  knex.from('products').innerJoin('swipes', 'products.id', 'swipes.products_id').then(fucntion(swipes) {
+    res.send(swipes)
+  })
 })
 
 module.exports = router;
