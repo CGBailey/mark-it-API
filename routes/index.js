@@ -55,7 +55,12 @@ router.post('/right', function(req, res, next) {
 })
   .then(function(product){
     knex('swipes').insert({product_id: product[0].id, right: true})
-  })
+  }).then(function(){
+    res.send({status: '200', message: "Sucess"})
+  }).catch(function(err){
+    console.log(err);
+    res.send(err)
+  });
 });
 
 router.post('/left', function(req, res, next) {
@@ -69,7 +74,12 @@ router.post('/left', function(req, res, next) {
 })
   .then(function(){
     knex('swipes').insert({product_id: product[0].id, left: true})
-  })
+  }).then(function(){
+    res.send({status: '200', message: "Sucess"})
+  }).catch(function(err){
+    console.log(err);
+    res.send(err)
+  });
 });
 
 router.post('/right', function(req, res, next) {
@@ -78,7 +88,10 @@ router.post('/right', function(req, res, next) {
     knex('swipes').where({product_id: product_id, right: true})
   }).then(function(swipes) {
     res.send(swipes.length)
-  })
+  }).catch(function(err){
+    console.log(err);
+    res.send(err)
+  });
 })
 
 
@@ -88,13 +101,19 @@ router.post('/left', function(req, res, next) {
     knex('swipes').Where({product_id: product_id, left: true})
   }).then(function(swipes) {
     res.send(swipes.length)
-  })
+  }).catch(function(err){
+    console.log(err);
+    res.send(err)
+  });
 })
 
 router.get('/swipes', function(req, res, next) {
-  knex.from('products').innerJoin('swipes', 'products.id', 'swipes.products_id').then(fucntion(swipes) {
+  knex.from('products').innerJoin('swipes', 'products.id', 'swipes.products_id').then(fucntion(results) {
     res.send(swipes)
-  })
+  }).catch(function(err){
+    console.log(err);
+    res.send(err)
+  });
 })
 
 module.exports = router;
