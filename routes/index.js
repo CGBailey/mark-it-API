@@ -82,7 +82,7 @@ router.post('/left', function(req, res, next) {
   });
 });
 
-router.post('/right', function(req, res, next) {
+router.get('/right', function(req, res, next) {
   knex('products').where({name: req.body.product_name})
   .then(function(product) {
     knex('swipes').where({product_id: product_id, right: true})
@@ -95,7 +95,7 @@ router.post('/right', function(req, res, next) {
 })
 
 
-router.post('/left', function(req, res, next) {
+router.get('/left', function(req, res, next) {
   knex('products').where({name: req.body.product_name}).
   then(function(product) {
     knex('swipes').Where({product_id: product_id, left: true})
@@ -108,8 +108,8 @@ router.post('/left', function(req, res, next) {
 })
 
 router.get('/swipes', function(req, res, next) {
-  knex.from('products').innerJoin('swipes', 'products.id', 'swipes.products_id').then(fucntion(results) {
-    res.send(swipes)
+  knex('products').then(function(results) {
+    res.send(results)
   }).catch(function(err){
     console.log(err);
     res.send(err)
