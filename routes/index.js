@@ -44,6 +44,29 @@ query()
   });
 });
 
+router.post('/right', function(req, res, next) {
+  knex('products').where({name: req.body.product_name})
+    .then(function(there) {
+      if(!there[0]) {
+        knex('products').insert({name: req.body.product_name})
+      }
+  })
+  .then(function(){
+    knex('swipes').insert({right: req.body.swipe})
+  })
+});
+
+router.post('/left', function(req, res, next) {
+  knex('products').where({name: req.body.product_name})
+    .then(function(there) {
+      if(!there[0]) {
+        knex('products').insert({name: req.body.product_name})
+      }
+  })
+  .then(function(){
+    knex('swipes').insert({left: req.body.swipe})
+  })
+});
 
 
 module.exports = router;
