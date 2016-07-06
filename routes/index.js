@@ -125,7 +125,7 @@ router.get('/swipes', function(req, res, next) {
 
 router.get('/stuff', function(req, res, next) {
   knex('products').then(function(products) {
-    res.send(products)
+    res.send(products.ItemAttributes[0].Title[0])
   }).catch(function(err){
     console.log(err);
     res.send(err)
