@@ -45,28 +45,50 @@ query()
 });
 
 router.post('/right', function(req, res, next) {
-  knex('products').where({name: req.body.product_name})
-    .then(function(there) {
-      if(!there[0]) {
-        knex('products').insert({name: req.body.product_name})
-      }
-  })
-  .then(function(){
-    knex('swipes').insert({right: req.body.swipe})
-  })
+  // knex('products').where({name: req.body.product_name})
+  //   .then(function(there) {
+  //     if(!there[0]) {
+  //       knex('products').insert({name: req.body.product_name})
+  //     }
+  // }).then(function(){
+  // knex('products').where({name: req.body.product_name})
+// })
+  // .then(function(product){
+  //   knex('swipes').insert({product_id: product[0].id, right: true})
+  // })
 });
 
 router.post('/left', function(req, res, next) {
-  knex('products').where({name: req.body.product_name})
-    .then(function(there) {
-      if(!there[0]) {
-        knex('products').insert({name: req.body.product_name})
-      }
-  })
-  .then(function(){
-    knex('swipes').insert({left: req.body.swipe})
-  })
+  // knex('products').where({name: req.body.product_name})
+  //   .then(function(there) {
+  //     if(!there[0]) {
+  //       knex('products').insert({name: req.body.product_name})
+  //     }
+  // }).then(function(){
+  // knex('products').where({name: req.body.product_name})
+// })
+  // .then(function(){
+  //   knex('swipes').insert({product_id: product[0].id, left: true})
+  // })
 });
 
+router.post('/right', function(req, res, next) {
+  // knex('products').where({name: req.body.product_name})
+  // .then(function(product) {
+  //   knex('swipes').where({product_id: product_id, right: true})
+  // }).then(function(swipes) {
+  //   res.send(swipes.length)
+  // })
+})
+
+
+router.post('/left', function(req, res, next) {
+  // knex('products').where({name: req.body.product_name}).
+  // then(function(product) {
+  //   knex('swipes').Where({product_id: product_id, left: true})
+  // }).then(function(swipes) {
+  //   res.send(swipes.length)
+  // })
+})
 
 module.exports = router;
