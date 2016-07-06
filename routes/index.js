@@ -108,12 +108,28 @@ router.get('/left', function(req, res, next) {
 })
 
 router.get('/swipes', function(req, res, next) {
-  knex('products').then(function(results) {
-    res.send(results)
+  knex('products').where({name: req.body.product_name}).
+  then(function(product) {
+    var product_id = product[0].id
+    knex('swipes').Where({product_id: product_id, left: true})
+  }).then(function(lefts) {
+    var leftSwipes = lefts.length
+    knex('swipes').where({product_id: product_id, right: true})
+  }).then(function(rights) {
+    res.send({dislikes: leftSwipes, likes: rights.length})
   }).catch(function(err){
     console.log(err);
     res.send(err)
-  });
+  })
+});
+
+router.get('/stuff', function(req, res, next) {
+  knex('products').then(function(products) {
+    res.send(products)
+  }).catch(function(err){
+    console.log(err);
+    res.send(err)
+  })
 })
 
 module.exports = router;
